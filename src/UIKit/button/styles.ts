@@ -158,4 +158,38 @@ export const ButtonUIKitWrapper = styled.button`
       }
     }
   }
+
+  &.icon {
+    padding: 0 12px;
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.secondary {
+      color: ${UIKitColors.text.primary};
+
+      &:hover {
+        color: ${UIKitColors.text.secondary};
+      }
+    }
+
+    &.danger {
+      color: ${UIKitColors.danger.default};
+
+      &:hover {
+        color: ${UIKitColors.danger.hover};
+      }
+
+      &:active {
+        color: ${UIKitColors.danger.active};
+      }
+    }
+
+    &:hover {
+      background-color: #f6f6f6;
+    }
+  }
 `;

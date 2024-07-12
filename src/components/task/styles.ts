@@ -4,6 +4,7 @@ import { UIKitColors } from "../../UIKit/colors";
 export const TaskWrapper = styled.li`
   background-color: ${UIKitColors.white};
   padding: 16px;
+  padding-right: 32px;
   border-radius: 16px;
   font-family: sans-serif;
 
@@ -14,6 +15,10 @@ export const TaskWrapper = styled.li`
 
     &:not(.context) {
       width: 15%;
+    }
+
+    &.actions {
+      gap: 8px;
     }
   }
 

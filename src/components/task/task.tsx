@@ -1,6 +1,7 @@
 import React from "react";
+import { Trash, Edit2 } from "iconsax-react";
+import { ButtonUIKit, ProgressBarUIKit } from "../../UIKit";
 import { TaskWrapper } from "./styles";
-import { ButtonUIKit } from "../../UIKit";
 
 export const Task: React.FC = () => {
   return (
@@ -15,9 +16,22 @@ export const Task: React.FC = () => {
         <span className="priority-context high">High</span>
       </div>
 
-      <div className="section status flex flex-col items-start justify-start">
+      <div className="section status flex flex-col items-center justify-center">
         <ButtonUIKit type="secondary" style="filled">
           To Do
+        </ButtonUIKit>
+      </div>
+
+      <div className="section status flex flex-col items-center justify-center">
+        <ProgressBarUIKit size={24} precentage={0} />
+      </div>
+
+      <div className="section actions flex flex-row items-end justify-center">
+        <ButtonUIKit type="secondary" style="icon">
+          <Edit2 size="24" />
+        </ButtonUIKit>
+        <ButtonUIKit type="danger" style="icon">
+          <Trash size="24" />
         </ButtonUIKit>
       </div>
     </TaskWrapper>
