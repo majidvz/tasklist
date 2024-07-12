@@ -37,6 +37,7 @@ export const TaskWrapper = styled.li`
   }
 
   .priority-context {
+    text-transform: capitalize;
     font-size: 16px;
     line-height: 32px;
     font-weight: 600;

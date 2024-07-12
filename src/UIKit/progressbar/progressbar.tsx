@@ -4,12 +4,11 @@ import { ProgressBarWrapper } from "./styles";
 
 export const ProgressBarUIKit: React.FC<IProgressBar> = ({
   size = 24,
-  precentage = 100,
+  percentage = 0,
 }) => {
-  const circumference: number = 2 * size * Math.PI;
-  const circumferencePercentage: number =
-    (1 - precentage / 100) * circumference;
+  const circumference: number = size * Math.PI;
   const strokeSize: number = size / 10;
+  const strokeDashoffset: number = (1 - percentage / 100) * circumference;
   const radius: number = size / 2;
 
   return (
@@ -31,7 +30,7 @@ export const ProgressBarUIKit: React.FC<IProgressBar> = ({
         cy={radius}
         r={radius}
         strokeDasharray={circumference}
-        strokeDashoffset={circumferencePercentage}
+        strokeDashoffset={strokeDashoffset}
         strokeWidth={strokeSize}
       ></circle>
     </ProgressBarWrapper>
