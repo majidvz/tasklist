@@ -1,7 +1,8 @@
-import { FC, useState } from "react";
+import { ChangeEvent, FC, useCallback, useEffect, useState } from "react";
 import { CloseCircle } from "iconsax-react";
 import { ModalUIKit, IModalUIKit, InputUIKit, ButtonUIKit } from "../../UIKit";
 import { useAppContext } from "../../contexts";
+import { ITask } from "../task/model";
 
 interface ITaskModal extends IModalUIKit {
   title: string;
@@ -9,14 +10,57 @@ interface ITaskModal extends IModalUIKit {
 type Priority = "low" | "medium" | "high";
 
 export const TaskModal: FC<ITaskModal> = ({ title, isOpen }) => {
+  const [inputValue, setInputValue] = useState<string>();
   const [priority, setPriority] = useState<Priority>();
+  const [isAddButtonActivated, setIsAddButtonActivated] =
+    useState<boolean>(false);
+
   const { setIsModalOpened } = useAppContext();
+  const { tasksList, setTasksList } = useAppContext();
+
+  const formValidator = useCallback(() => {
+    setIsAddButtonActivated(!!inputValue && !!priority);
+  }, [inputValue, priority]);
+
+  useEffect(() => {
+    formValidator();
+  }, [formValidator]);
+
   const selectPriorityHandler = (value: Priority) => {
     setPriority(value);
   };
 
   const closeModal = () => {
     setIsModalOpened(false);
+  };
+
+  const inputOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+
+  const submitForm = () => {
+    if (!!inputValue && !!priority) {
+      const priorityConvertedToEnum =
+        priority === "low" ? 0 : priority === "medium" ? 1 : 2;
+
+      const newTask: ITask = {
+        id: 0,
+        title: inputValue,
+        priority: priorityConvertedToEnum,
+        status: 0,
+      };
+
+      setTasksList([...tasksList, newTask]);
+
+      localStorage.setItem(
+        "tasksList",
+        JSON.stringify([...tasksList, newTask])
+      );
+
+      setInputValue(undefined);
+      setPriority(undefined);
+      setIsModalOpened(false);
+    }
   };
 
   return (
@@ -40,10 +84,20 @@ export const TaskModal: FC<ITaskModal> = ({ title, isOpen }) => {
             Task
           </label>
           <InputUIKit
+            name="taskName"
             id="taskName"
             className="w-full"
             placeholder="Type your task here..."
+            onChange={inputOnChange}
+            value={inputValue || ""}
           />
+          <small
+            className={`text-sm text-red-600 text-left ${
+              !!inputValue ? "hidden" : "block"
+            }`}
+          >
+            There is a problem, please solve it.
+          </small>
         </div>
 
         <div className="form-wrapper flex flex-col justify-start items-start gap-[8px]">
@@ -79,16 +133,26 @@ export const TaskModal: FC<ITaskModal> = ({ title, isOpen }) => {
               High
             </ButtonUIKit>
           </div>
+          <small
+            className={`text-sm text-red-600 text-left ${
+              !!priority ? "hidden" : "block"
+            }`}
+          >
+            There is a problem, please solve it.
+          </small>
         </div>
       </div>
 
-      <ButtonUIKit
-        style="filled"
-        type="primary"
-        className="disabled mt-[32px] w-full"
-      >
-        Add Task
-      </ButtonUIKit>
+      <footer className="mt-[32px] flex flex-row justify-end items-center">
+        <ButtonUIKit
+          style="filled"
+          type="primary"
+          className={isAddButtonActivated ? "" : "disabled"}
+          onClick={submitForm}
+        >
+          Add Task
+        </ButtonUIKit>
+      </footer>
     </ModalUIKit>
   );
 };
