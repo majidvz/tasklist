@@ -1,10 +1,10 @@
-import React from "react";
+import { FC } from "react";
 import { TasksList, Header } from "../components";
-import { HomeWrapper } from "./styles";
 import { useAppContext } from "../contexts";
+import { HomeWrapper } from "./styles";
 
-export const Home: React.FC = () => {
-  const { tasksList, setTasksList } = useAppContext();
+export const Home: FC = () => {
+  const { tasksList } = useAppContext();
 
   return (
     <HomeWrapper className="flex flex-col justify-start items-center w-3/4 mx-auto">

@@ -1,18 +1,31 @@
-import React from "react";
+import { FC } from "react";
 import { Trash, Edit2 } from "iconsax-react";
 import { ButtonUIKit, ProgressBarUIKit } from "../../UIKit";
 import { TaskWrapper } from "./styles";
-import { ITask } from "./ITask";
+import { ITask } from "./model";
+import { TaskPriority, TaskStatus } from "./enum";
 
-export const Task: React.FC<ITask> = ({ title, priority, status }) => {
+export const Task: FC<ITask> = ({ title, priority, status }) => {
   const progressBarpercentage: number =
-    status === 0 ? 0 : status === 1 ? 50 : 100;
+    status === TaskStatus.ToDo
+      ? 0
+      : status === TaskStatus.InProgress
+      ? 50
+      : 100;
 
   const priorityLabel: string =
-    priority === 0 ? "low" : priority === 1 ? "medium" : "high";
+    priority === TaskPriority.Low
+      ? "low"
+      : priority === TaskPriority.Medium
+      ? "medium"
+      : "high";
 
   const statusLabel: string =
-    status === 0 ? "To Do" : status === 1 ? "In Progress" : "Done";
+    status === TaskStatus.ToDo
+      ? "To Do"
+      : status === TaskStatus.InProgress
+      ? "In Progress"
+      : "Done";
 
   return (
     <TaskWrapper className="flex justify-start items-center w-full">

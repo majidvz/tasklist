@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
-import { AppProvider } from "./contexts";
+import { useEffect } from "react";
+import { useAppContext } from "./contexts";
 import { Home } from "./pages";
 import { ITask } from "./components";
+import { TASK_LIST } from "./constant";
 import { AppWrapper } from "./styles";
 
 function App() {
-  const [tasksList, setTasksList] = useState<ITask[]>([]);
+  const { setTasksList } = useAppContext();
 
   useEffect(() => {
-    const getTasksList = localStorage.getItem("tasksList");
+    const getTasksList = localStorage.getItem(TASK_LIST);
     if (getTasksList) {
       try {
         const parsedTasksList: ITask[] = JSON.parse(getTasksList);
@@ -20,11 +21,9 @@ function App() {
   }, []);
 
   return (
-    <AppProvider value={{ tasksList, setTasksList }}>
-      <AppWrapper>
-        <Home />
-      </AppWrapper>
-    </AppProvider>
+    <AppWrapper>
+      <Home />
+    </AppWrapper>
   );
 }
 

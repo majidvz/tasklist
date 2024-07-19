@@ -16,6 +16,10 @@ export const ButtonUIKitWrapper = styled.button`
   align-items: center;
   gap: 8px;
 
+  &:not(.icon) {
+    min-width: 100px;
+  }
+
   .secondary {
     color: ${UIKitColors.text.primary};
   }
@@ -167,6 +171,8 @@ export const ButtonUIKitWrapper = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-basis: 0;
+    flex-shrink: 0;
 
     &.secondary {
       color: ${UIKitColors.text.primary};
@@ -190,6 +196,17 @@ export const ButtonUIKitWrapper = styled.button`
 
     &:hover {
       background-color: #f6f6f6;
+    }
+  }
+
+  &.disabled {
+    background-color: #eee !important;
+    color: rgba(0, 0, 0, 0.45) !important;
+    cursor: no-drop;
+
+    &:hover {
+      box-shadow: none;
+      color: rgba(0, 0, 0, 0.45) !important;
     }
   }
 `;

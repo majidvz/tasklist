@@ -1,4 +1,4 @@
-import { ITask } from "../task/ITask";
+import { ITask } from "../task/model";
 
 export interface ITasksList {
   list: ITask[];

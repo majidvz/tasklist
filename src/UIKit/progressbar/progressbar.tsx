@@ -1,8 +1,8 @@
-import React from "react";
-import { IProgressBar } from "./IProgressbar";
+import { FC } from "react";
+import { IProgressBar } from "./model";
 import { ProgressBarWrapper } from "./styles";
 
-export const ProgressBarUIKit: React.FC<IProgressBar> = ({
+export const ProgressBarUIKit: FC<IProgressBar> = ({
   size = 24,
   percentage = 0,
 }) => {

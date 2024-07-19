@@ -10,7 +10,7 @@ export const ProgressBarWrapper = styled.svg`
   }
 
   .background {
-    stroke: ${UIKitColors.text.secondary};
+    stroke: #eee;
   }
 
   .bar {

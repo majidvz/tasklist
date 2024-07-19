@@ -1,10 +1,10 @@
-import React from "react";
 import { ITask, Task } from "../task";
 import { NoResults } from "../noResults";
 import { TasksListWrapper } from "./styles";
-import { ITasksList } from "./ITasksList";
+import { ITasksList } from "./model";
+import { FC } from "react";
 
-export const TasksList: React.FC<ITasksList> = ({ list }) => {
+export const TasksList: FC<ITasksList> = ({ list }) => {
   const tasks: ITask[] = [
     {
       id: 0,
